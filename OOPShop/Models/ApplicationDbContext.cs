@@ -1,0 +1,18 @@
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace OOPShop.Models
+{
+    public class ApplicationDbContext : AbstractApplicationDbContext
+    {
+        public ApplicationDbContext()
+        {
+            Database.EnsureCreated();
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseMySql("server=localhost;user=oopuser;password=password;database=oopdb;",
+                new MySqlServerVersion(new Version(8, 0, 28)));
+        }
+    }
+}
