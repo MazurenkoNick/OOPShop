@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using OOPShop.Repositories.Interfaces;
 using OOPShop.Repositories;
+using OOPShop.Services.Interfaces;
+using OOPShop.Services;
 using OOPShop.Models;
 
 
@@ -8,7 +10,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // adding services
 builder.Services.AddMvc();
+builder.Services.AddSingleton<IUserService, UserService>();
+
 builder.Services.AddSingleton<AbstractApplicationDbContext, ApplicationDbContext>();
+builder.Services.AddSingleton<AuthUser, AuthUser>();
 // adding repositories
 builder.Services.AddSingleton<IOrderRepository, OrderRepository>();
 builder.Services.AddSingleton<IUserRepository, UserRepository>();

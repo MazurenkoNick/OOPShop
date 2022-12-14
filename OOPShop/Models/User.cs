@@ -1,16 +1,14 @@
-﻿namespace OOPShop.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace OOPShop.Models
 {
     public class User
     {
         public int Id { get; set; }
+        [Required]
         public string? Name { get; set; }
+        [Required]
         public string? Password { get; set; }
-
-        public User(int id, string name, string password)
-        {
-            Id = id;
-            Name = name;
-            Password = password;
-        }
+        public double Balance { get; set; }
     }
 }

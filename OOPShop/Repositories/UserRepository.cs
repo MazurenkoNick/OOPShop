@@ -1,6 +1,5 @@
 ﻿using OOPShop.Repositories.Interfaces;
 using OOPShop.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace OOPShop.Repositories
 {
@@ -42,6 +41,12 @@ namespace OOPShop.Repositories
         public User? GetById(int id)
         {
             User? user = db.Users.FirstOrDefault(u => u.Id == id);
+            return user;
+        }
+
+        public User? GetByName(string name)
+        {
+            User? user = db.Users.FirstOrDefault(u => u.Name == name);
             return user;
         }
     }

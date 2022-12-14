@@ -1,0 +1,19 @@
+﻿<h1>Login Form</h1>
+
+@if (TempData["AlertMessage"] != null)
+{
+    <div>
+        <h2>@TempData["AlertMessage"]</h2>
+    </div>    
+}
+
+
+<form action="/user/login" method="post">
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name">
+
+    <label for="password">Password:</label>
+    <input type="password" name="password" id="password">
+
+    <input type="submit" value="Submit"/>
+</form>
