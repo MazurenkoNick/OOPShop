@@ -43,5 +43,10 @@ namespace OOPShop.Repositories
             OrderItem? orderItem = db.OrderItems.FirstOrDefault(o => o.Id == id);
             return orderItem;
         }
+
+        public void Save()
+        {
+            db.SaveChanges();
+        }
     }
 }

@@ -63,5 +63,25 @@ namespace OOPShop.Services
             userRepository.Add(user);
             return user;
         }
+
+        public bool AddToBalance(User user, double amount)
+        {
+            if (user is null)
+                return false;
+
+            user.Balance += amount;
+            userRepository.Save();
+            return true;
+        }
+        public bool WithdrawFromBalance(User user, double amount)
+        {
+            return AddToBalance(user, -amount);
+        }
+
+
+        public List<Order> getAllOrders(User user)
+        {
+            return userRepository.getAllOrders(user);
+        }
     }
 }

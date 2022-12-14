@@ -1,0 +1,51 @@
+﻿@using OOPShop.Repositories.Interfaces;
+@inject IProductRepository productRepository
+
+<h1>Order Info</h1>
+<table>
+    <tr>
+        <th>Order Id</th>
+        <th>Status</th>
+        <th>Total Sum</th>
+    </tr>
+            
+    <tr>
+        <th>@ViewBag.order.Id</th>
+        <th>@ViewBag.order.Status</th>
+        <th>@ViewBag.order.TotalSum</th>
+    </tr>
+            
+</table>
+
+@if (@ViewBag.order.Status == 0)
+{
+    <form action="~/order/cancel/orderId=@ViewBag.order.Id" method="post">
+        <input type="submit" value="CANCEL"/>
+    </form>
+
+    <form action="~/order/complete/orderId=@ViewBag.order.Id" method="post">
+        <input type="submit" value="COMPLETE"/>
+    </form>
+}
+
+<h2>Items In The Order:</h2>
+<table>
+    <tr>
+        <th>Item Id</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Title</th>
+        <th>Description</th>
+    </tr>
+@foreach (var item in ViewBag.items)
+    {
+        var product = productRepository.GetById(@item.ProductId);
+    <tr>
+        <th>@item.Id</th>
+        <th>@item.Quantity</th>
+        <th>@product.Price</th>
+        <th>@product.Title</th>
+        <th>@product.Description</th>
+    </tr>
+    }
+</table>

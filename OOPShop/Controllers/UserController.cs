@@ -88,5 +88,19 @@ namespace OOPShop.Controllers
             }
             return RedirectToAction("Login");
         }
+
+        [HttpPost]
+        [Route("user/addToBalance")]
+        public IActionResult AddToBalance(double amount)
+        {
+            if (authUser.IsNotAuthenticated())
+            {
+                TempData["AlertMessage"] = "You must log in!";
+                return RedirectToAction("Login");
+            }
+
+            userService.AddToBalance(authUser.User, amount);
+            return RedirectPermanent("~/");
+        }
     }
 }

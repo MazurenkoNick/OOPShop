@@ -11,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 // adding services
 builder.Services.AddMvc();
 builder.Services.AddSingleton<IUserService, UserService>();
+builder.Services.AddSingleton<IOrderService, OrderService>();
 
 builder.Services.AddSingleton<AbstractApplicationDbContext, ApplicationDbContext>();
 builder.Services.AddSingleton<AuthUser, AuthUser>();
@@ -24,6 +25,8 @@ builder.Services.AddSingleton<IOrderItemRepository, OrderItemRepository>();
 var app = builder.Build();
 
 // mapping controllers with routes
-app.MapControllers();
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Order}/{action=Info}/{orderId}");
 
 app.Run();

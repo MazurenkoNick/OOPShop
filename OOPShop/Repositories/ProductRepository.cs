@@ -43,5 +43,10 @@ namespace OOPShop.Repositories
             Product? product = db.Products.FirstOrDefault(p => p.Id == id);
             return product;
         }
+
+        public void Save()
+        {
+            db.SaveChanges();
+        }
     }
 }

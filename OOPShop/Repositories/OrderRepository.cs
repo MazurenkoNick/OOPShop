@@ -1,5 +1,6 @@
 ﻿using OOPShop.Repositories.Interfaces;
 using OOPShop.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace OOPShop.Repositories
 {
@@ -38,10 +39,22 @@ namespace OOPShop.Repositories
             return db.Orders.ToList();
         }
 
+        public List<OrderItem> GetAllItems(Order order)
+        {
+            // get all items of the order which is passed as an argument to the method
+            return db.OrderItems.FromSqlRaw(String.Format("SELECT * FROM orderitems WHERE orderitems.OrderId = {0}", order.Id))
+                                .ToList();
+        }
+
         public Order? GetById(int id)
         {
            Order? order = db.Orders.FirstOrDefault(o => o.Id == id);
             return order;
+        }
+
+        public void Save()
+        {
+            db.SaveChanges();
         }
     }
 }

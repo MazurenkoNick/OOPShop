@@ -5,6 +5,7 @@
         List<T> GetAll();
         T? GetById(int id);
         void Add(T entity);
-        bool Delete(int id);        
+        bool Delete(int id);
+        void Save();
     }
 }

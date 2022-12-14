@@ -6,9 +6,12 @@ namespace OOPShop.Services.Interfaces
     {
         User SignUp(User user);
         bool LogIn(string name, string password);
-        public void Add(User user);
-        public bool Delete(int id);
-        public List<User> GetAll();
-        public User? GetById(int id);
+        void Add(User user);
+        bool Delete(int id);
+        List<User> GetAll();
+        User? GetById(int id);
+        bool AddToBalance(User user, double amount);
+        bool WithdrawFromBalance(User user, double amount);
+        List<Order> getAllOrders(User user);
     }
 }
