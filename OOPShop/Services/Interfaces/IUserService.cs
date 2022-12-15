@@ -12,6 +12,7 @@ namespace OOPShop.Services.Interfaces
         User? GetById(int id);
         bool AddToBalance(User user, double amount);
         bool WithdrawFromBalance(User user, double amount);
+        Order getOpenOrder(User user);
         List<Order> getAllOrders(User user);
     }
 }

@@ -6,11 +6,18 @@ namespace OOPShop.Services
 {
     public class OrderService : IOrderService
     {
+        IOrderItemRepository orderItemRepository;
         IOrderRepository orderRepository;
+        IUserService userService;
+        AuthUser authUser;
 
-        public OrderService(IOrderRepository orderRepository)
+        public OrderService(IOrderRepository orderRepository, IUserService userService,
+                            IOrderItemRepository orderItemRepository, AuthUser authUser)
         {
+            this.authUser = authUser;
+            this.userService = userService;
             this.orderRepository = orderRepository;
+            this.orderItemRepository = orderItemRepository;
         }
 
         public void Add(Order order)
@@ -43,6 +50,34 @@ namespace OOPShop.Services
         public List<OrderItem> GetAllItems(Order order)
         {
             return orderRepository.GetAllItems(order);
+        }
+
+        public bool Order(Product product, int quantity)
+        {
+            // price of the last added products
+            double totalItemsPrice = product.Price * quantity;
+
+            // creating a new order / getting already existing open order of the current user
+            // add total price of the products which are passed as an argument
+            Order order = userService.getOpenOrder(authUser.User);
+            double totalSum = order.TotalSum + totalItemsPrice;
+
+            if (totalSum > authUser.User.Balance)
+            {
+                return false;
+            }
+
+            order.TotalSum = totalSum;
+            orderRepository.Save(order);
+
+            // creating order item for the ordered mentioned above
+            OrderItem orderItem = new OrderItem();
+            orderItem.Quantity = quantity;
+            orderItem.OrderId = order.Id;
+            orderItem.ProductId = product.Id;
+            orderItemRepository.Save(orderItem);
+
+            return true;
         }
 
         public Order? GetById(int id)

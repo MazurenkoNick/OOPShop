@@ -5,7 +5,7 @@
     <form action="user/addToBalance" method="post">
         <h4>
             <label for="amount">Add To The Balance:</label>
-            <input type="number" step="0.001" id="amount" name="amount"/>
+            <input type="number" step="0.001" id="amount" name="amount" min="0.001"/>
             <input type="submit" value="Submit"/>
         </h4>
     </form>
@@ -18,7 +18,7 @@
         <h3>Orders:</h3> 
         <table>
             <tr>
-                <th>Id</th>
+                <th>Order Id</th>
                 <th>Status</th>
                 <th>Total Sum</th>
                 <th>Order Info</th>

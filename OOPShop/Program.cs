@@ -26,8 +26,6 @@ builder.Services.AddSingleton<IOrderItemRepository, OrderItemRepository>();
 var app = builder.Build();
 
 // mapping controllers with routes
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Order}/{action=Info}/{orderId}");
+app.MapControllers();
 
 app.Run();

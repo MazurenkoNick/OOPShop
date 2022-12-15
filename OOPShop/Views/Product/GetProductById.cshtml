@@ -1,0 +1,29 @@
+﻿<h2>Product Info</h2>
+@if (TempData["AlertMessage"] != null)
+{
+    <div>
+        <h2>@TempData["AlertMessage"]</h2>
+    </div>    
+}
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th>Product Number</th>
+    </tr>
+
+    <tr>
+        <th>@ViewBag.product.Title</th>
+        <th>@ViewBag.product.Price</th>
+        <th>@ViewBag.product.Description</th>
+        <th>@ViewBag.product.Id</th>
+    </tr>    
+</table>    
+
+<form action="/product/one/order/" method="post">
+    <input type="hidden" id="productId" name="productId" value="@ViewBag.product.Id"/>
+    <label for="quantity">Quantity</label>
+    <input type="number" id="quantity" name="quantity" min="1"/>
+    <input type="submit" value="Order"/>
+</form>

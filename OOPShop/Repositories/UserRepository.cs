@@ -46,6 +46,13 @@ namespace OOPShop.Repositories
                             .ToList();
         }
 
+        public Order? getOpenOrder(User user)
+        {
+            return db.Orders.FromSqlRaw(
+                String.Format("SELECT * FROM orders WHERE orders.UserId = {0} AND orders.Status = 0", user.Id)).FirstOrDefault();
+
+        }
+
         public User? GetById(int id)
         {
             User? user = db.Users.FirstOrDefault(u => u.Id == id);
@@ -60,6 +67,13 @@ namespace OOPShop.Repositories
 
         public void Save()
         {
+            db.SaveChanges();
+        }
+
+        public void Save(User user)
+        {
+            if (GetById(user.Id) == null)
+                db.Add(user);
             db.SaveChanges();
         }
     }

@@ -5,6 +5,7 @@ namespace OOPShop.Services.Interfaces
     public interface IOrderService
     {
         void Add(Order order);
+        public bool Order(Product product, int quantity);
         bool Delete(int id);
         List<Order> GetAll();
         List<OrderItem> GetAllItems(Order order);

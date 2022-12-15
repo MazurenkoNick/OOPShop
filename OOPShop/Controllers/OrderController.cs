@@ -25,7 +25,7 @@ namespace OOPShop.Controllers
         {
             Order? order = orderService.GetById(orderId);
 
-            if (verifyOrderAuth(order) is false)
+            if (userHasRights(order) is false)
             {
                 return RedirectPermanent("~/");
             }
@@ -43,7 +43,7 @@ namespace OOPShop.Controllers
         {
             Order? order = orderService.GetById(orderId);
 
-            if (verifyOrderAuth(order) is false)
+            if (userHasRights(order) is false)
             {
                 return RedirectPermanent("~/");
             }
@@ -59,7 +59,7 @@ namespace OOPShop.Controllers
         {
             Order? order = orderService.GetById(orderId);
 
-            if (verifyOrderAuth(order) is false)
+            if (userHasRights(order) is false)
             {
                 return RedirectPermanent("~/");
             }
@@ -70,13 +70,11 @@ namespace OOPShop.Controllers
             return RedirectPermanent(String.Format("~/order/info/orderId={0}", order.Id));
         }
 
-        private bool verifyOrderAuth(Order? order)
+        private bool userHasRights(Order? order)
         {
-            if (order == null || authUser.IsNotAuthenticated() || order.UserId != authUser.User.Id)
-            {
-                return false;
-            }
-            return true;
+            // if order doesn't exist or user is not authenticated or user doesn't have this order
+            // then the user has no rights to see the page
+            return !(order == null || authUser.IsNotAuthenticated() || order.UserId != authUser.User.Id);
         }
     }
 }

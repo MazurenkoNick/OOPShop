@@ -99,7 +99,11 @@ namespace OOPShop.Controllers
                 return RedirectToAction("Login");
             }
 
-            userService.AddToBalance(authUser.User, amount);
+            if (amount > 0)
+            {
+                userService.AddToBalance(authUser.User, amount);
+            }
+
             return RedirectPermanent("~/");
         }
     }

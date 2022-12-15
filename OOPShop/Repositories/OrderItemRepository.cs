@@ -48,5 +48,12 @@ namespace OOPShop.Repositories
         {
             db.SaveChanges();
         }
+
+        public void Save(OrderItem orderItem)
+        {
+            if (GetById(orderItem.Id) == null)
+                db.Add(orderItem);
+            db.SaveChanges();
+        }
     }
 }

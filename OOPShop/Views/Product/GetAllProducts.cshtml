@@ -4,18 +4,24 @@
 {
 <table>
     <tr>
-        <th>Id</th>
-        <th>Price</th>
         <th>Title</th>
+        <th>Price</th>
         <th>Description</th>
+        <th>Product Number</th>
+        <th>Order</th>
     </tr>
     @foreach (var product in ViewBag.products)
     {
     <tr>
-        <th>@product.Id</th>
-        <th>@product.Price</th>
         <th>@product.Title</th>
+        <th>@product.Price</th>
         <th>@product.Description</th>
+        <th>@product.Id</th>
+        <th>
+            <form action="/product/one/info/@product.Id" method="get">
+                <input type="submit" value="Order"/>
+            </form>
+        </th>
     </tr>
     }
 </table>    
