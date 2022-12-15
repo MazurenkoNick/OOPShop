@@ -12,6 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddMvc();
 builder.Services.AddSingleton<IUserService, UserService>();
 builder.Services.AddSingleton<IOrderService, OrderService>();
+builder.Services.AddSingleton<IProductService, ProductService>();
 
 builder.Services.AddSingleton<AbstractApplicationDbContext, ApplicationDbContext>();
 builder.Services.AddSingleton<AuthUser, AuthUser>();
