@@ -70,7 +70,7 @@ namespace OOPShop.Controllers
 
         private bool userHasRights(Product? product)
         {
-            return !(product == null || authUser.IsNotAuthenticated());
+            return product != null && authUser.IsAuthenticated();
         }
         
     }

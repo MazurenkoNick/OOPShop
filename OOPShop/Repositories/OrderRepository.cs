@@ -46,6 +46,20 @@ namespace OOPShop.Repositories
                                 .ToList();
         }
 
+        public List<Order> GetAllOrders(User user)
+        {
+            // get all orders of the user who is passed as an argument to the method
+            return db.Orders.FromSqlRaw(String.Format("SELECT * FROM orders WHERE orders.UserId = {0}", user.Id))
+                            .ToList();
+        }
+
+        public Order? GetOpenOrder(User user)
+        {
+            return db.Orders.FromSqlRaw(
+                String.Format("SELECT * FROM orders WHERE orders.UserId = {0} AND orders.Status = 0", user.Id)).FirstOrDefault();
+
+        }
+
         public Order? GetById(int id)
         {
            Order? order = db.Orders.FirstOrDefault(o => o.Id == id);

@@ -6,15 +6,15 @@ namespace OOPShop.Controllers
 {
     public class HomeController : Controller
     {
-        private IUserService userService;
+        private IOrderService orderService;
         private ILogger<HomeController> logger;
         private AbstractApplicationDbContext db;
         private AuthUser authUser;
 
         // DI
-        public HomeController(IUserService userService, AuthUser authUser, ILogger<HomeController> logger, AbstractApplicationDbContext db)
+        public HomeController(IOrderService userService, AuthUser authUser, ILogger<HomeController> logger, AbstractApplicationDbContext db)
         {
-            this.userService = userService;
+            this.orderService = userService;
             this.authUser = authUser;
             this.logger = logger;
             this.db = db;
@@ -26,7 +26,7 @@ namespace OOPShop.Controllers
         {
             if (authUser.IsAuthenticated())
             {
-                ViewBag.orders = userService.getAllOrders(authUser.User);
+                ViewBag.orders = orderService.GetAllOrders(authUser.User);
                 ViewBag.user = authUser.User;
                 return View();
             }

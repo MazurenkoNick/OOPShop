@@ -13,5 +13,7 @@ namespace OOPShop.Services.Interfaces
         void Save();
         void Complete(Order order);
         void Cancel(Order order);
+        Order GetOpenOrder(User user);
+        List<Order> GetAllOrders(User user);
     }
 }

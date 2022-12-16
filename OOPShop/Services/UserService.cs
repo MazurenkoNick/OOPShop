@@ -77,23 +77,5 @@ namespace OOPShop.Services
         {
             return AddToBalance(user, -amount);
         }
-
-
-        public List<Order> getAllOrders(User user)
-        {
-            return userRepository.getAllOrders(user);
-        }
-
-        public Order getOpenOrder(User user)
-        {
-            Order? order = userRepository.getOpenOrder(user);
-            if (order is null)
-            {
-                order = new Order();
-                order.Status = OrderStatus.Open;
-                order.UserId = user.Id;
-            }
-            return order;
-        }
     }
 }

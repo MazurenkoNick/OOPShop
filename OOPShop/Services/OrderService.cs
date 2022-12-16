@@ -8,14 +8,11 @@ namespace OOPShop.Services
     {
         IOrderItemRepository orderItemRepository;
         IOrderRepository orderRepository;
-        IUserService userService;
         AuthUser authUser;
 
-        public OrderService(IOrderRepository orderRepository, IUserService userService,
-                            IOrderItemRepository orderItemRepository, AuthUser authUser)
+        public OrderService(IOrderRepository orderRepository, IOrderItemRepository orderItemRepository, AuthUser authUser)
         {
             this.authUser = authUser;
-            this.userService = userService;
             this.orderRepository = orderRepository;
             this.orderItemRepository = orderItemRepository;
         }
@@ -59,7 +56,7 @@ namespace OOPShop.Services
 
             // creating a new order / getting already existing open order of the current user
             // add total price of the products which are passed as an argument
-            Order order = userService.getOpenOrder(authUser.User);
+            Order order = GetOpenOrder(authUser.User);
             double totalSum = order.TotalSum + totalItemsPrice;
 
             if (totalSum > authUser.User.Balance)
@@ -78,6 +75,23 @@ namespace OOPShop.Services
             orderItemRepository.Save(orderItem);
 
             return true;
+        }
+
+        public List<Order> GetAllOrders(User user)
+        {
+            return orderRepository.GetAllOrders(user);
+        }
+
+        public Order GetOpenOrder(User user)
+        {
+            Order? order = orderRepository.GetOpenOrder(user);
+            if (order is null)
+            {
+                order = new Order();
+                order.Status = OrderStatus.Open;
+                order.UserId = user.Id;
+            }
+            return order;
         }
 
         public Order? GetById(int id)
