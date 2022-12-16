@@ -1,49 +1,52 @@
 ﻿@using OOPShop.Repositories.Interfaces;
 @inject IProductRepository productRepository
 
-<h1>Order Info</h1>
-<table>
-    <tr>
-        <th>Order Id</th>
-        <th>Status</th>
-        <th>Total Sum</th>
-    </tr>
-            
-    <tr>
-        <th>@ViewBag.order.Id</th>
-        <th>@ViewBag.order.Status</th>
-        <th>@ViewBag.order.TotalSum</th>
-    </tr>
-            
-</table>
+<div class="container">
+    <div class="row">
+        <div class="col-auto">
+    <p class="m-3">
+        <b>Order Id:</b> @ViewBag.order.Id
+        <br>
+        <b>Status:</b> <span class="text-primary">@ViewBag.order.Status</span>
+        <br>
+        <b>Total sum of the order:</b> @ViewBag.order.TotalSum
+        <br>      
+    </p>
 
-@if (@ViewBag.order.Status == 0)
+    @if (@ViewBag.order.Status == 0)
 {
-    <form action="~/order/cancel/orderId=@ViewBag.order.Id" method="post">
-        <input type="submit" value="CANCEL"/>
+    <form class="form-inline" action="~/order/complete/orderId=@ViewBag.order.Id" method="post">
+        <input class="btn btn-success m-2" type="submit" value="COMPLETE"/>
     </form>
 
-    <form action="~/order/complete/orderId=@ViewBag.order.Id" method="post">
-        <input type="submit" value="COMPLETE"/>
+    <form class="form-inline" action="~/order/cancel/orderId=@ViewBag.order.Id" method="post">
+        <input class="btn btn-danger m-2" type="submit" value="CANCEL"/>
     </form>
 }
+        </div>
 
-<h2>Items In The Order:</h2>
-<table>
+    <div class="col-auto">
+        
+<p class="m-0""><b>Products in the order:</b></p>
+<table class="table-secondary table-bordered border-primary text-center">
     <tr>
-        <th>Title</th>
-        <th>Quantity</th>
-        <th>Price For An Item</th>
-        <th>Description</th>
+        <th class="text-center" scope="col">Title</th>
+        <th class="text-center" scope="col">Quantity</th>
+        <th class="text-center" scope="col">Price For An Item</th>
+        <th class="text-center" scope="col">Description</th>
     </tr>
 @foreach (var item in ViewBag.items)
     {
         var product = productRepository.GetById(@item.ProductId);
     <tr>
-        <th>@product.Title</th>
-        <th>@item.Quantity</th>
-        <th>@product.Price</th>
-        <th>@product.Description</th>
+        <td class="text-center" >@product.Title</td>
+        <td class="text-center" >@item.Quantity</td>
+        <td class="text-center" >@product.Price</td>
+        <td class="text-center" >@product.Description</td>
     </tr>
     }
 </table>
+    </div>
+
+    </div>
+</div>
