@@ -84,7 +84,7 @@ namespace OOPShop.Controllers
             if (authUser.IsAuthenticated())
             {
                 TempData["AlertMessage"] = "You successfully logged out!";
-                authUser.User = null;
+                userService.LogOut();
             }
             return RedirectToAction("Login");
         }

@@ -52,7 +52,12 @@ namespace OOPShop.Services
             return false;
         }
 
-        public User SignUp(User user)
+        public void LogOut()
+        {
+            authUser.User = null;
+        }
+
+        public User? SignUp(User user)
         {
             // if user with the same name exists - return null
             if (user is null || userRepository.GetByName(user.Name) != null)
