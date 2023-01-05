@@ -29,7 +29,7 @@ namespace OOPShop.Controllers
         }
 
         [HttpGet]
-        [Route("/product/get/one/info/{productId:int}")]
+        [Route("/product/get/info/{productId:int}")]
         public IActionResult GetProductById(int productId)
         {
             Product? product = productService.GetById(productId);
@@ -65,7 +65,7 @@ namespace OOPShop.Controllers
                 TempData["AlertMessage"] = "You have successfully added the product to the cart!";
             }
 
-            return RedirectPermanent(String.Format("/product/get/one/info/{0}", productId));
+            return RedirectPermanent(String.Format("/product/get/info/{0}", productId));
         }
 
         private bool userHasRights(Product? product)

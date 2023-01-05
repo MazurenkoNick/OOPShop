@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using OOPShop.Models;
 
-namespace OOPShop.Models
+namespace OOPShop.Data
 {
     public abstract class AbstractApplicationDbContext : DbContext
     {

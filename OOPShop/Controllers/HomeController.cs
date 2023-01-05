@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OOPShop.Services.Interfaces;
 using OOPShop.Models;
+using OOPShop.Data;
 
 namespace OOPShop.Controllers
 {

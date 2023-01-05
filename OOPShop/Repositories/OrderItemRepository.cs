@@ -1,5 +1,6 @@
 ﻿using OOPShop.Repositories.Interfaces;
 using OOPShop.Models;
+using OOPShop.Data;
 
 namespace OOPShop.Repositories
 {

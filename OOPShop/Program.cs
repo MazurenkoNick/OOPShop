@@ -4,7 +4,7 @@ using OOPShop.Repositories;
 using OOPShop.Services.Interfaces;
 using OOPShop.Services;
 using OOPShop.Models;
-
+using OOPShop.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

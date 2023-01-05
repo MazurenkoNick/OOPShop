@@ -1,6 +1,7 @@
 ﻿using OOPShop.Repositories.Interfaces;
 using OOPShop.Models;
 using Microsoft.EntityFrameworkCore;
+using OOPShop.Data;
 
 namespace OOPShop.Repositories
 {
