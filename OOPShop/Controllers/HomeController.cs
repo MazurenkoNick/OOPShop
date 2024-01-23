@@ -9,16 +9,14 @@ namespace OOPShop.Controllers
     {
         private IOrderService orderService;
         private ILogger<HomeController> logger;
-        private AbstractApplicationDbContext db;
         private AuthUser authUser;
 
         // DI
-        public HomeController(IOrderService userService, AuthUser authUser, ILogger<HomeController> logger, AbstractApplicationDbContext db)
+        public HomeController(IOrderService orderService, AuthUser authUser, ILogger<HomeController> logger)
         {
-            this.orderService = userService;
+            this.orderService = orderService;
             this.authUser = authUser;
             this.logger = logger;
-            this.db = db;
         }
 
         [HttpGet]

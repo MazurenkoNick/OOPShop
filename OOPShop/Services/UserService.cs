@@ -42,7 +42,7 @@ namespace OOPShop.Services
 
             if (user != null)
             {
-                isValidPassword = BCrypt.Net.BCrypt.Verify(password, user.Password);
+                 isValidPassword = BCrypt.Net.BCrypt.Verify(password, user.Password);
             }
             if (isValidPassword)
             {
@@ -64,8 +64,11 @@ namespace OOPShop.Services
             {
                 return null;
             }
-            user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
-            userRepository.Add(user);
+            else
+            {
+                user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
+                userRepository.Add(user);
+            }
             return user;
         }
 
